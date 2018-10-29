@@ -1,0 +1,26 @@
+{
+  "name": "vision-xa-nodejs-serve",
+  "version": "1.0.0",
+  "description": "A lightweight demonstration web server for  @vision-dbms/connect",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MichaelJCaruso/vision-xa-nodejs-serve.git"
+  },
+  "author": "Mike Caruso",
+  "license": "BSD-3-Clause",
+  "bugs": {
+    "url": "https://github.com/MichaelJCaruso/vision-xa-nodejs-serve/issues"
+  },
+  "homepage": "https://github.com/MichaelJCaruso/vision-xa-nodejs-serve#readme",
+  "dependencies": {
+    "@vision-dbms/connect": "^1.0.0",
+    "cors": "^2.8.4",
+    "express": "^4.16.4",
+    "helmet": "^3.14.0",
+    "morgan": "^1.9.1"
+  }
+}
