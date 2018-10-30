@@ -40,11 +40,11 @@ class Configuration {
     ifItem (...items) { // === ifItem (item, item ..., callback)
 	// Remove the 'callback' from the end of the item list...
         const callback=items.pop ();
-	/// ... and call on the item values ...
+	/// ... and call that callback ...
         return this.onItem (
             ...items,
 	    (...items)=>(
-		// ... iff no item value is 'false' or 'undefined':
+		// ... iff all items are defined (and not 'false'):
                 items.reduce ((cum,cur)=>cum && cur,true) && callback(...items)
 	    )
         );
