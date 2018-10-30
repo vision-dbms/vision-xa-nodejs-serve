@@ -34,26 +34,26 @@ class Configuration {
     }
 
     deleteItem (item) {
-	delete process.env[this.getVariable (item)];
+        delete process.env[this.getVariable (item)];
     }
 
     ifItem (...items) { // === ifItem (item, item ..., callback)
-	// Remove the 'callback' from the end of the item list...
+        // Remove the 'callback' from the end of the item list...
         const callback=items.pop ();
-	/// ... and call that callback ...
+        /// ... and call that callback ...
         return this.onItem (
             ...items,
-	    (...items)=>(
-		// ... iff all items are defined (and not 'false'):
+            (...items)=>(
+                // ... iff all items are defined (and not 'false'):
                 items.reduce ((cum,cur)=>cum && cur,true) && callback(...items)
-	    )
+            )
         );
     }
     onItem (...items) { // === onItem (item, item ..., callback)
-	// Remove the 'callback' from the end of the item list...
-	const callback=items.pop ();
-	// ... and apply it to the item values:
-	return callback (...items.map (item=>this.getItem (item)));
+        // Remove the 'callback' from the end of the item list...
+        const callback=items.pop ();
+        // ... and apply it to the item values:
+        return callback (...items.map (item=>this.getItem (item)));
     }
 }
 
@@ -114,7 +114,7 @@ const servers = {
 
 MyConfiguration.ifItem (
     'http_port', port=>{
-	const newServer=http.createServer (app);
+        const newServer=http.createServer (app);
         console.log (`Starting http server on port ${port}`);
         newServer.listen (port);
         servers.http = newServer;
@@ -127,19 +127,19 @@ MyConfiguration.ifItem (
 
 MyConfiguration.ifItem (
     'https_port', 'https_key_file', 'https_cert_file', (port,keyfile,certfile)=>{
-	const httpsOptions = {
+        const httpsOptions = {
             key  : fs.readFileSync (keyfile),
             cert : fs.readFileSync (certfile)
-	};
-	MyConfiguration.ifItem (
-	    'https_passphrase', passphrase=>{
-		httpsOptions.passphrase = passphrase;
-		MyConfiguration.deleteItem ('https_passphrase');
-	    }
-	);
-	const newServer=https.createServer (httpsOptions, app);
+        };
+        MyConfiguration.ifItem (
+            'https_passphrase', passphrase=>{
+                httpsOptions.passphrase = passphrase;
+                MyConfiguration.deleteItem ('https_passphrase');
+            }
+        );
+        const newServer=https.createServer (httpsOptions, app);
         console.log (`Starting https server on port ${port}`);
         newServer.listen (port);
-	servers.https=newServer;
+        servers.https=newServer;
     }
 );
