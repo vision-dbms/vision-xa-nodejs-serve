@@ -122,7 +122,6 @@ Here's the result:
 
 <pre>
 bash-3.2$ python
-python
 Python 2.7.10 (default, Oct  6 2017, 22:29:07) 
 Type "help", "copyright", "credits" or "license" for more information.
 >>> import urllib, urllib2, json
