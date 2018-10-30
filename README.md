@@ -74,4 +74,69 @@ See the documentation for _[node.js](https://nodejs.org)_ in general and _[node.
 
 ### A _Python_ example
 
-ON THE WAY
+One of the powerful features of _@vision-dbms/connect_ is its ability to create, use, and return _JavaScript_ and _JSON_ objects from _Vision_.  Included in this sample is a sample _Vision_ query that returns a JSON object containing a subset of the schema data available for a _Vision_ class (_[examples/schema.vis](examples/schema.vis)_ in this repository):
+
+```
+#####
+#  Show the messages associated with the Security class...
+#####
+
+#--  Identify class to profile
+!class <- "Security" asClass;
+!cd <- class classDescriptor ;
+
+#-- Add some basic properties that describe the class to supplied JS object
+JS
+ set: "class" to: cd name .
+ set: "description" to: cd description .
+ set: "parent" to: cd parent whatAmI.
+;
+
+#-- create a list JS objects representing each message in the class
+!messageObjects <- class getMessages
+  send: [ GlobalWorkspace JS newObject
+             set: "message" to: code .
+             set: "returnType" to: returnObjectType whatAmI.
+             set: "messageType" to: type code .
+        ] ;
+
+#-- and return the array as the web query's JSON result...
+JS jsObject returnJSON: (JS newArrayFrom: messageObjects. jsParam);
+```
+
+Assuming that the _http_ server listening at port _2300_ described above is running, the following _Python_ code runs that query:
+
+```python
+import urllib, urllib2, json
+
+query = {'expression': open('./examples/schema.vis','r').read()}
+request  = urllib2.Request ('http://localhost:2300/vision/api', urllib.urlencode(query))
+response = urllib2.urlopen(request)
+json_object = json.loads (response.read())
+
+json_object[10]
+json_object[10]['message']
+```
+
+Here's the result:
+
+<pre>
+bash-3.2$ python
+python
+Python 2.7.10 (default, Oct  6 2017, 22:29:07) 
+Type "help", "copyright", "credits" or "license" for more information.
+>>> import urllib, urllib2, json
+>>> 
+>>> query = {'expression': open('./examples/schema.vis','r').read()}
+>>> request  = urllib2.Request ('http://localhost:2300/vision/api', urllib.urlencode(query))
+>>> response = urllib2.urlopen(request)
+>>> json_object = json.loads (response.read())
+>>> 
+>>> json_object[10]
+json_object[10]
+{u'returnType': u'Schema ClassDescriptor', u'message': u'asSelf', u'messageType': u'Primitive'}
+>>> json_object[10]['message']
+json_object[10]['message']
+u'asSelf'
+>>> 
+</pre>
