@@ -122,20 +122,18 @@ Here's the result:
 
 <pre>
 bash-3.2$ python
-Python 2.7.10 (default, Oct  6 2017, 22:29:07) 
+Python 2.7.10 (default, Oct  6 2017, 22:29:07)
 Type "help", "copyright", "credits" or "license" for more information.
 >>> import urllib, urllib2, json
->>> 
+>>>
 >>> query = {'expression': open('./examples/schema.vis','r').read()}
 >>> request  = urllib2.Request ('http://localhost:2300/vision/api', urllib.urlencode(query))
 >>> response = urllib2.urlopen(request)
 >>> json_object = json.loads (response.read())
->>> 
+>>>
 >>> json_object[10]
-json_object[10]
 {u'returnType': u'Schema ClassDescriptor', u'message': u'asSelf', u'messageType': u'Primitive'}
 >>> json_object[10]['message']
-json_object[10]['message']
 u'asSelf'
->>> 
+>>>
 </pre>

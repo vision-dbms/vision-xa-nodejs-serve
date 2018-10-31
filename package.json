@@ -8,14 +8,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/MichaelJCaruso/vision-xa-nodejs-serve.git"
+    "url": "git+https://github.com/vision-dbms/vision-xa-nodejs-serve.git"
   },
   "author": "Mike Caruso",
   "license": "BSD-3-Clause",
   "bugs": {
-    "url": "https://github.com/MichaelJCaruso/vision-xa-nodejs-serve/issues"
+    "url": "https://github.com/vision-dbms/vision-xa-nodejs-serve/issues"
   },
-  "homepage": "https://github.com/MichaelJCaruso/vision-xa-nodejs-serve#readme",
+  "homepage": "https://github.com/vision-dbms/vision-xa-nodejs-serve#readme",
   "dependencies": {
     "@vision-dbms/connect": "^1.0.0",
     "cors": "^2.8.4",
