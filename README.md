@@ -65,7 +65,7 @@ export vision_xa_nodejs_serve_https_cert_file=PATH_TO_YOUR_PEM_FORMAT_CERT_CHAIN
 and, if your private key is encrypted with a pass-phrase:
 
 ```bash
-export vision_xa_nodejs_serve_https_https_passphrase=YOUR_SECRET_PASS_PHRASE
+export vision_xa_nodejs_serve_https_passphrase=YOUR_SECRET_PASS_PHRASE
 ```
 
 (Don't worry too much, the value for that environment variable will be deleted from the node process as soon as it has been used to decrypt your private key).
